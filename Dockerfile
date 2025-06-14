@@ -32,11 +32,10 @@ WORKDIR /var/www/html
 
 # Copy Laravel project files into the container
 COPY . /var/www/html
-
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Laravel setup
-RUN php artisan key:generate && \
-    php artisan config:clear
+
+
 
