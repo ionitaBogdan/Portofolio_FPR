@@ -28,6 +28,12 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' \
     /etc/apache2/apache2.conf \
     /etc/apache2/sites-available/default-ssl.conf
 
+# Install Node and build assets
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs && \
+    npm install && \
+    npm run build
+
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
