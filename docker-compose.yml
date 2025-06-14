@@ -1,5 +1,20 @@
 version: "3.8"
+
 services:
+    php-web:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: php-web
+        volumes:
+            - .:/var/www/html
+        ports:
+            - "8080:80"
+        depends_on:
+            - mysql-db
+        networks:
+            - laravel-net
+
     mysql-db:
         image: mysql:8.0
         container_name: mysql-db
@@ -14,20 +29,11 @@ services:
         ports:
             - "3306:3306"
         networks:
-            - emp-net
-    php-web:
-        build:
-            context: .
-        container_name: php-web
-        volumes:
-            - .:/var/www/html
-        ports:
-            - "8080:80"
-        depends_on:
-            - mysql-db
-        networks:
-            - emp-net
+            - laravel-net
+
 volumes:
     mysql_data:
+
 networks:
-    emp-net:
+    laravel-net:
+
