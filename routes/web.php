@@ -96,3 +96,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('/manager/gemba/{gemba}/update', [ManagerController::class, 'updateGembaManager'])->middleware('role:manager')->name('manager.gemba.update');
     Route::get('/manager/gemba/{gemba}/actions', [ManagerController::class, 'showGembaActions'])->middleware('role:manager')->name('manager.gemba.actions');
 });
+Route::get('/debug', function () {
+    return [
+        'APP_ENV' => env('APP_ENV'),
+        'APP_KEY' => config('app.key') ? 'Set ✅' : 'Missing ❌',
+        'APP_DEBUG' => config('app.debug'),
+        'DB_CONNECTION' => config('database.default'),
+        'DB_DATABASE' => config('database.connections.'.config('database.default').'.database'),
+    ];
+});
+
