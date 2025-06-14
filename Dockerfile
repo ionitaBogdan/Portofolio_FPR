@@ -35,8 +35,3 @@ COPY . /var/www/html
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
-
-# Laravel setup
-RUN php artisan key:generate && \
-    php artisan config:clear
-
