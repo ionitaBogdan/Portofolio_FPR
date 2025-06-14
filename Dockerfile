@@ -28,11 +28,16 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' \
     /etc/apache2/apache2.conf \
     /etc/apache2/sites-available/default-ssl.conf
 
-# Install Node and build assets
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
-    apt-get install -y nodejs && \
+# Install Node.js and dependencies for Vite build
+RUN apt-get update && apt-get install -y \
+    curl \
+    gnupg \
+    ca-certificates \
+    nodejs \
+    npm && \
     npm install && \
     npm run build
+
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
