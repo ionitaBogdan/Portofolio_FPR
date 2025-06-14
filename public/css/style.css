@@ -1,0 +1,49 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    background-color: #333;
+}
+
+.navbar-menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.navbar-item {
+    float: left;
+}
+
+.navbar-item a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 2%; /* Adjust as needed */
+    text-decoration: none;
+}
+
+.navbar-item a:hover {
+    background-color: #111;
+}
+
+.active {
+    background-color: #4CAF50;
+}
+
+.content {
+    padding: 2%; /* Adjust as needed */
+    margin-top: 3%; /* Adjust as needed */
+    background-color: #31aef5;
+    height: 1500px; /* This should probably be adjusted to a percentage or auto */
+}
+
+@media screen and (max-width: 600px) {
+    .navbar-item {
+        float: none;
+        width: 100%;
+    }
+}
