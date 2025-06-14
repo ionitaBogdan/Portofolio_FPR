@@ -39,16 +39,6 @@ COPY . .
 
 # Fix permissions for Laravel storage and cache
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-
-            # Install PHP dependencies using Composer
-            RUN composer install --no-dev --optimize-autoloader
-
-            # Clear and cache Laravel configuration and routes
-            RUN php artisan config:clear && \
-                php artisan route:clear && \
-                php artisan view:clear && \
-                php artisan config:cache
-
 # Expose port 80 for Apache
 EXPOSE 80
 
