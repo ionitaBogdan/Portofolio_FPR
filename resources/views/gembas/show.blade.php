@@ -83,7 +83,7 @@
         </div>
 
         <div class="content">
-                <strong>Team Leader:</strong> {{ $gemba->team_lead }}
+            <strong>Team Leader:</strong> {{ $gemba->team_lead }}
         </div>
 
         <div class="content">
@@ -122,8 +122,7 @@
                             <td>{{ $actionList->manager }}</td>
                             <td>{{ $actionList->status }}</td>
                             <td>
-                                <a href="{{ route('actions.edit', ['gemba' => $gemba, 'actionList' => $actionList]) }}"
-                                   class="button is-small button is-info">Edit</a>
+                                <a href="{{ route('actions.edit', ['gemba' => $gemba, 'actionList' => $actionList]) }}" class="button is-small button is-info">Edit</a>
                             </td>
                         </tr>
                     @endforeach

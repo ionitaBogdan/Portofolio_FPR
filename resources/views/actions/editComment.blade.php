@@ -151,15 +151,3 @@
         </form>
     </div>
 </x-layout.main>
-<script>
-        // Burger menu functionality
-        document.addEventListener('DOMContentLoaded', () => {
-            const burgerIcon = document.querySelector('.navbar-burger');
-            const navbarMenu = document.querySelector('.navbar-menu');
-
-            burgerIcon.addEventListener('click', () => {
-                burgerIcon.classList.toggle('is-active');
-                navbarMenu.classList.toggle('is-active');
-            });
-        });
-    </script>
