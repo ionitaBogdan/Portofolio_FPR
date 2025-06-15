@@ -1,3 +1,21 @@
+<style>
+    .table {
+        font-size: 20px;
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table th,
+    .table td {
+        font-size: inherit;
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    .table th {
+        background-color: #f2f2f2;
+    }
+</style>
 <x-layout.main>
     <div id="multistep-form">
         <form action="{{ route('gembas.update', $gemba) }}" method="POST">
@@ -9,7 +27,7 @@
                     <label for="location" class="label">Location</label>
                     <div class="control">
                         <div class="select">
-                            <select name="location" required>
+                            <select name="location">
                                 <option value="" disabled selected hidden>Choose a location</option>
                                 @foreach(['Office Building A', 'Factory Floor B', 'Warehouse C', 'Retail Store D', 'Distribution Center E', 'Workshop F'] as $location)
                                     <option value="{{ $location }}" {{ $gemba->location == $location ? 'selected' : '' }}>{{ $location }}</option>
@@ -23,30 +41,15 @@
                     <label for="status" class="label">Status</label>
                     <div class="control">
                         <div class="select">
-                            <select name="status" required>
+                            <select name="status">
                                 <option value="" disabled selected hidden>Change status</option>
-                                @foreach(['Open', 'Closed'] as $status)
+                                @foreach(['Open','In Progress', 'Closed'] as $status)
                                     <option value="{{ $status }}" {{ $gemba->status == $status ? 'selected' : '' }}>{{ $status }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                 </div>
-
-                <div class="field">
-                    <label for="manager_id" class="label">Manager</label>
-                    <div class="control">
-                        <div class="select">
-                            <select name="manager_id" required>
-                                <option value="" disabled selected hidden>Choose a manager</option>
-                                @foreach($managers as $manager)
-                                    <option value="{{ $manager->id }}" {{ $gemba->manager_id == $manager->id ? 'selected' : '' }}>{{ $manager->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
                 <button type="button" class="button full-width-button next-step">Next</button>
             </div>
 
@@ -54,7 +57,7 @@
             <div class="box step-2" style="display: none;">
                 <div class="field">
                     <label for="date" class="label">Date</label>
-                    <input class="input" type="datetime-local" name="date" value="{{ $gemba->date }}" required>
+                    <input  class="input" type="datetime-local" name="date" value="{{ $gemba->date }}">
                 </div>
                 <div class="content">
                     @if ($gemba->getmembers()->count() > 0)
@@ -116,8 +119,8 @@
                         <a href="{{ route('actions.create', $gemba) }}" class="button is-small button is-info">Add new action</a>
                     @endif
                 </div>
-                <button type="submit" class="button full-width-button">Submit</button>
                 <button type="button" class="button full-width-button prev-step">Previous</button>
+                <button type="submit" class="button full-width-button">Submit</button>
             </div>
         </form>
     </div>
@@ -159,4 +162,15 @@
             });
         });
     </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const burgerIcon = document.getElementById('burger');
+        const navLinks = document.getElementById('nav-links');
+
+        burgerIcon.addEventListener('click', () => {
+            burgerIcon.classList.toggle('is-active');
+            navLinks.classList.toggle('is-active');
+        });
+    });
+</script>
 </x-layout.main>

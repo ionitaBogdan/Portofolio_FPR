@@ -9,7 +9,7 @@
                 <label for="location" class="label">Location</label>
                 <div class="control">
                     <div class="select">
-                        <select name="location" required>
+                        <select aria-label="location" name="location" required>
                             <option value="" disabled selected hidden>Choose a location</option>
                             <option value="Office Building A">Office Building A</option>
                             <option value="Factory Floor B">Factory Floor B</option>
@@ -26,7 +26,7 @@
                 <label for="team_lead" class="label">Team Leader</label>
                 <div class="control">
                     <div class="select">
-                        <select name="team_lead" required>
+                        <select aria-label="team_lead" name="team_lead" required>
                             <option value="" disabled selected hidden>Choose the team leader</option>
                             <option value="Jasmine Patel">Jasmine Patel</option>
                             <option value="Ethan Carter">Ethan Carter</option>
@@ -42,7 +42,7 @@
                 <label for="manager_id" class="label">Manager</label>
                 <div class="control">
                     <div class="select">
-                        <select name="manager_id" required>
+                        <select aria-label="manager_id" name="manager_id" required>
                             <option value="" disabled selected hidden>Choose a manager</option>
                             @foreach($managers as $manager)
                                 <option value="{{ $manager->id }}">{{ $manager->name }}</option>
@@ -53,7 +53,7 @@
             </div>
 
             <div class="control">
-                <button type="submit" class="button is-primary">Create</button>
+                <button type="submit" class="button is-info">Create</button>
             </div>
         </form>
     </div>

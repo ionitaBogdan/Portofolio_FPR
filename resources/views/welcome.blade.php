@@ -134,7 +134,6 @@
                                     &nbsp;<p> - </p>
                                 @endisset
                             </td>
-                               
                             </tr>
                         @endfor
                         </tbody>
@@ -158,7 +157,7 @@
                         <canvas id="myChart"></canvas>
                     </div>
                     <div style="text-align: center; margin-top: 20px;">
-                        <button id="generateReportButton" class="button is-primary">View Report</button>
+                        <button id="generateReportButton" class="button is-info">View Report</button>
                     </div>
                 </div>
             </div>
