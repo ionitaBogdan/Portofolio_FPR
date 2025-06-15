@@ -52,16 +52,25 @@ class ActionListController extends Controller
         ]);
     }
 
-    public function edit(ActionList $actionList)
+    public function edit(Gemba $gemba, ActionList $actionList)
     {
+        if (!$this->authorize('update', $actionList)) {
+            return redirect()->back()->with('error', 'You are not authorised');
+        }
+
         Session::put('previous_url', url()->previous());
         return view('actions.edit', [
+            'gemba_id' => $gemba->id,
             'actionList' => $actionList
         ]);
     }
 
     public function update(Request $request, ActionList $actionList)
     {
+        if (!$this->authorize('update', $actionList)) {
+            return redirect()->back()->with('error', 'You are not authorised');
+        }
+
         $validated = $request->validate([
             'location' => 'required',
             'improvements' => 'required',
@@ -75,16 +84,12 @@ class ActionListController extends Controller
             ->with('success', 'Action List successfully updated');
     }
 
-    public function editComment(ActionList $actionList)
-    {
-        Session::put('previous_url', url()->previous());
-        return view('actions.editComment', [
-            'actionList' => $actionList
-        ]);
-    }
-
     public function updateComment(Request $request, ActionList $actionList)
     {
+        if (!$this->authorize('update', $actionList)) {
+            return redirect()->back()->with('error', 'You are not authorised');
+        }
+
         $validated = $request->validate([
             'date_complete' => 'nullable|date',
             'comment' => 'nullable|string',
@@ -116,6 +121,10 @@ class ActionListController extends Controller
 
     public function destroy(ActionList $actionList)
     {
+        if (!$this->authorize('delete', $actionList)) {
+            return redirect()->back()->with('error', 'You are not authorised');
+        }
+
         $actionList->delete();
 
         return redirect()->route('actions.index')

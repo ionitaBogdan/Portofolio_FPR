@@ -13,7 +13,7 @@
     <!-- logo / brand -->
     <div class="navbar-brand">
       <a class="navbar-item" href="{{ route('welcome') }}">
-        <img src="assets/outokumpu.png" style="max-height: 70px" class="py-2 px-2">
+        <img src="{{ asset('assets/outokumpu.png') }}" style="max-height: 70px" class="py-2 px-2">
       </a>
       <a class="navbar-burger" id="burger">
         <span></span>

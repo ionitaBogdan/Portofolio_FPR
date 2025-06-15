@@ -78,7 +78,7 @@
             <input type="hidden" name="gemba_id" value="{{ $gemba_id }}">
             <div class="field is-grouped">
                 <div class="control">
-                    <button type="submit" class="button is-info">Save</button>
+                    <button type="submit" class="button is-primary">Save</button>
                 </div>
                 <div class="control">
                     <a href="{{ Session::get('previous_url', route('gembas.index')) }}" class="button is-light">Cancel</a>
