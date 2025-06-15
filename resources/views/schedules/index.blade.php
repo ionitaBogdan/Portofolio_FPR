@@ -2,34 +2,36 @@
     <h1 class="is-size-1 is-italic has-text-centered">Schedule</h1>
     <div class="container">
         <form method="GET" action="{{ route('schedules.index') }}" id="filter-form">
-            <div class="field is-grouped">
-                <div class="control">
+            <div class="field is-grouped is-grouped-multiline">
+                <div class="control is-expanded">
                     <label class="label">Location</label>
                     <div class="select is-fullwidth">
                         <select name="location" onchange="this.form.submit()">
                             <option value="">All Locations</option>
                             @foreach ($locations as $location)
-                                <option  value="{{ $location }}" {{ request('location') == $location ? 'selected' : '' }}>
+                                <option value="{{ $location }}" {{ request('location') == $location ? 'selected' : '' }}>
                                     {{ $location }}
                                 </option>
                             @endforeach
                         </select>
                     </div>
                 </div>
-                <div class="control" style="margin-left: 1rem;">
+                <div class="control is-expanded">
                     <label class="label">Team Leader</label>
-                    <div class="select">
+                    <div class="select is-fullwidth">
                         <select name="team_lead" onchange="this.form.submit()">
                             <option value="">All Team Leaders</option>
                             @foreach ($team_leads as $team_lead)
-                                <option value="{{ $team_lead }}" {{ request('team_lead') == $team_lead ? 'selected' : '' }}>{{ $team_lead }}</option>
+                                <option value="{{ $team_lead }}" {{ request('team_lead') == $team_lead ? 'selected' : '' }}>
+                                    {{ $team_lead }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
                 </div>
-                <div class="control" style="margin-left: 1rem;">
+                <div class="control is-expanded">
                     <label class="label">Quarter</label>
-                    <div class="select">
+                    <div class="select is-fullwidth">
                         <select name="quarter" onchange="this.form.submit()">
                             <option value="">All Quarters</option>
                             <option value="1" {{ request('quarter') == 1 ? 'selected' : '' }}>Q1 (Jan - Mar)</option>
@@ -39,7 +41,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="control" style="margin-left: 1rem;">
+                <div class="control is-expanded">
                     <label for="week" class="label">Week</label>
                     <input class="input" type="week" name="week" value="{{ request('week') }}" onchange="this.form.submit()">
                 </div>
@@ -65,7 +67,7 @@
         </div>
 
         <div class="columns is-mobile is-centered">
-            <div class="column is-half">
+            <div class="column is-full-mobile is-half-tablet">
                 <div class="columns is-mobile is-vcentered">
                     <div class="column">
                         <strong>Month | Week</strong>
@@ -75,17 +77,18 @@
                     @if(request('location') == '' || request('location') == $gemba->location)
                         <div class="columns is-mobile is-vcentered">
                             <div class="column date-m-w">
-                                <h2 class="has-text-black">{{ $gemba->date->format('F') }} | {{ $gemba->date->weekOfYear }}</h2>
+                                <h2 class="has-text-black">{{ $gemba->date->format('F') }} |
+                                    {{ $gemba->date->weekOfYear }}</h2>
                             </div>
                         </div>
                     @endif
                     <div class="columns is-mobile is-vcentered">
                         <div class="column is-full">
                             @if($gemba->status == 'Not exist')
-                                <a href="{{ route('gembas.create-with-date', ['date' => $gemba->date->format('Y-m-d')]) }}" class="notification is-padding-4 is-block custom-hover not-exist" style="background-color: {{ $gemba->color }};">
+                                <a href="{{ route('gembas.create-with-date', ['date' => $gemba->date->format('Y-m-d')]) }}"
+                                   class="notification is-padding-4 is-block custom-hover not-exist" style="background-color: {{ $gemba->color }};">
                                     <p class="has-text-centered is-size-5 has-text-grey">Schedule a new Gemba walk</p>
                                 </a>
-
                             @else
                                 @php
                                     $overlayClass = $gemba->status === 'Closed' ? 'closed-overlay' : '';

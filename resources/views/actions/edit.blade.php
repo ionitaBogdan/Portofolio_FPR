@@ -30,7 +30,9 @@
                     <div class="control">
                         <textarea name="improvements" placeholder="Enter improvements here"
                                   class="textarea" required>{{ old('improvements', $actionList->improvements) }}</textarea>
-                        @error('improvements')<p>{{ $message }}</p>@enderror
+                        @error('improvements')
+                        <div class="has-text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
 
@@ -40,7 +42,8 @@
                         <div class="select">
                             <select name="location">
                                 <option value="" disabled selected hidden>Choose a location</option>
-                                @foreach(['Office Building A', 'Factory Floor B', 'Warehouse C', 'Retail Store D', 'Distribution Center E', 'Workshop F'] as $location)
+                                @foreach(['Office Building A', 'Factory Floor B', 'Warehouse C',
+                                'Retail Store D', 'Distribution Center E', 'Workshop F'] as $location)
                                     <option value="{{ $location }}" {{ $actionList->location == $location ? 'selected' : '' }}>{{ $location }}</option>
                                 @endforeach
                             </select>
@@ -66,7 +69,7 @@
 
                 <div class="field is-grouped">
                     <div class="control">
-                        <button type="submit" class="button is-primary">Save</button>
+                        <button type="submit" class="button is-info">Save</button>
                     </div>
                     <div class="control">
                         <a type="button" href="{{ Session::get('previous_url', route('gembas.index')) }}" class="button is-light">
@@ -78,3 +81,15 @@
         </form>
     </div>
 </x-layout.main>
+<script>
+        // Burger menu functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const burgerIcon = document.querySelector('.navbar-burger');
+            const navbarMenu = document.querySelector('.navbar-menu');
+
+            burgerIcon.addEventListener('click', () => {
+                burgerIcon.classList.toggle('is-active');
+                navbarMenu.classList.toggle('is-active');
+            });
+        });
+    </script>

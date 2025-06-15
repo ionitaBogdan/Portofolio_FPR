@@ -45,13 +45,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/actionLists', [ActionListController::class, 'index'])->name('actions.index');
     Route::get('/actionLists/{actionList}', [ActionListController::class, 'show'])->name('actions.show');
 
-    Route::middleware(['role:manager|admin', 'can:update,actionList'])->group(function () {
+    Route::middleware(['role:manager|admin'])->group(function () {
         Route::get('/actionLists/{actionList}/edit', [ActionListController::class, 'edit'])->name('actions.edit');
         Route::put('/actionLists/{actionList}', [ActionListController::class, 'update'])->name('actions.update');
-        Route::get('actions/{actionList}/editComment', [ActionListController::class, 'editComment'])->name('actions.editComment');
-        Route::put('actions/{actionList}/updateComment', [ActionListController::class, 'updateComment'])->name('actions.updateComment');
     });
-
+    Route::put('actions/{actionList}/updateComment', [ActionListController::class, 'updateComment'])->name('actions.updateComment');
+    Route::get('actions/{actionList}/editComment', [ActionListController::class, 'editComment'])->name('actions.editComment');
     Route::middleware(['role:manager|admin', 'can:delete,actionList'])->group(function () {
         Route::delete('/actionLists/{actionList}', [ActionListController::class, 'destroy'])->name('actions.delete');
     });
@@ -97,3 +96,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('/manager/gemba/{gemba}/update', [ManagerController::class, 'updateGembaManager'])->middleware('role:manager')->name('manager.gemba.update');
     Route::get('/manager/gemba/{gemba}/actions', [ManagerController::class, 'showGembaActions'])->middleware('role:manager')->name('manager.gemba.actions');
 });
+Route::get('/debug', function () {
+    return [
+        'APP_ENV' => env('APP_ENV'),
+        'APP_KEY' => config('app.key') ? 'Set ✅' : 'Missing ❌',
+        'APP_DEBUG' => config('app.debug'),
+        'DB_CONNECTION' => config('database.default'),
+        'DB_DATABASE' => config('database.connections.'.config('database.default').'.database'),
+    ];
+});
+

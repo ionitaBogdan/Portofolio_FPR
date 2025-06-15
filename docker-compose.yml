@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+    php-web:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: php-web
+        volumes:
+            - .:/var/www/html
+        ports:
+            - "8080:80"
+        depends_on:
+            - mysql-db
+        networks:
+            - laravel-net
+
+    mysql-db:
+        image: mysql:8.0
+        container_name: mysql-db
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: secret
+            MYSQL_DATABASE: laravel
+            MYSQL_USER: laraveluser
+            MYSQL_PASSWORD: secret
+        volumes:
+            - mysql_data:/var/lib/mysql
+        ports:
+            - "3306:3306"
+        networks:
+            - laravel-net
+
+volumes:
+    mysql_data:
+
+networks:
+    laravel-net:
+
